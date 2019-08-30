@@ -7,7 +7,7 @@ const { resolve } = require('path');
 const program = require('commander');
 // __dirname返回源代码所在的目录。
 const package = require(resolve(__dirname, './package.json'));
-
+const { initProject } = require('./utils');
 
 // 定义当前版本
 // 定义使用方法
@@ -31,7 +31,7 @@ program
                 initProject();
                 console.log('初始化完成');
             } catch (e) {
-                log(e);
+                console.log(e);
             }
         })();
         return;
@@ -42,7 +42,7 @@ program
             try {
                 require('./server');
             } catch (e) {
-                log(e);
+                console.log(e);
             }
         })();
     }

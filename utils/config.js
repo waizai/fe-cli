@@ -24,3 +24,9 @@ const npmrc = [
     'fse_binary_host_mirror=https://npm.taobao.org/mirrors/fsevents/'
 ];
 
+
+module.exports = {
+    scripts,
+    gitIgnore,
+    npmrc
+}

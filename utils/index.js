@@ -1,12 +1,13 @@
 
 const glob = require('glob');
-const {copySync, writeJsonSync} = require('fs-extra');
-const {relative, resolve} = require('path');
-
+const { copySync, writeJsonSync } = require('fs-extra');
+const { relative, resolve } = require('path');
+const { existsSync, writeFileSync} = require('fs');
+const { scripts, gitIgnore, npmrc } = require('./config');
 
 
 const rootPath = process.cwd();
-const projectTemplate = resolve(__dirname, '../../templates');
+const projectTemplate = resolve(__dirname, '../templates');
 const package = `${rootPath}/package.json`;
 
 
@@ -29,10 +30,16 @@ const initProject = () => {
         .sync(`${projectTemplate}/**/*`, {nodir: true, dot: true})
         .filter(v => !v.includes('.DS_Store'))
         .map((v, i, arr) =>
-            log(`${i === arr.length - 1 ? '└─' : '├─'} ${relative(projectTemplate, v)}`, 'green')
+            console.log(`${i === arr.length - 1 ? '└─' : '├─'} ${relative(projectTemplate, v)}`, 'green')
         );
 
     updatePackageFile();
     produceFile('.npmrc', npmrc);
     produceFile('.gitignore', gitIgnore);
+}
+
+
+
+module.exports = {
+    initProject
 }
