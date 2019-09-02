@@ -25,7 +25,6 @@ program
 
 
     if (program.init) {
-        console.log('init');
         (async () => {
             try {
                 initProject();
@@ -38,8 +37,11 @@ program
     }
 
     if( program.dev ){
+        const { prepack } = require('./webpack/utils');
         (async () => {
             try {
+                // 打包
+                prepack();
                 require('./server');
             } catch (e) {
                 console.log(e);
